@@ -8,7 +8,7 @@ export const CREATE_USER = gql`
     $motherLastName: String
     $birth: String
     $email: String
-    $phone: Int
+    $phone: String
   ) {
     createUser(
       userName: $userName
@@ -19,14 +19,7 @@ export const CREATE_USER = gql`
       email: $email
       phone: $phone
     ) {
-      id
-      userName
-      middleName
-      lastname
-      motherLastName
-      birth
-      email
-      phone
+      message
     }
   }
 `;

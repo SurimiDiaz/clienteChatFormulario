@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 //import "dotenv/config";
 
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import "./index.css";
 import {
   ApolloClient,
@@ -18,7 +20,9 @@ const client = new ApolloClient({
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
+  <Provider store={store}>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </Provider>
 );

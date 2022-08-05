@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { addUser } from "../../redux/actions";
 import { InfoShow } from "../informationShow";
-
+import { Article, Input, Submit } from "../styleForm";
 export const Birth = () => {
-  const [input, setInput] = useState({ birth: "" });
+  const [input, setInput] = useState({ birth: "2018-07-22" });
+  const dispatch = useDispatch();
+  const [sig, setSig] = useState(false);
   const handleChange = (e) => {
     const dateControl = document.querySelector('input[type="date"]');
 
@@ -12,21 +15,24 @@ export const Birth = () => {
       birth: dateControl.value,
     });
   };
-
-  console.log(input);
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addUser(input));
+    setSig(!sig);
+  };
   return (
-    <>
+    <Article>
       <h3>¿Fecha de nacimiento?</h3>
-      <>
-        <input
+      <form onSubmit={handleSubmit}>
+        <Input
           type="date"
           name="birth"
           onChange={(e) => handleChange(e)}
-          value="2018-07-22"
+          value={input.birth}
         />
-      </>
+        <Submit type="submit" value="siguiente" />
+      </form>
       <InfoShow input={input} />
-    </>
+    </Article>
   );
 };
